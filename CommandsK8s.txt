@@ -75,3 +75,41 @@ kubectl describe pvc <pvc-name> -n nginx
 kubectl config get-contexts
 kubectl config current-context
 kubectl cluster-info
+
+# StatefulSets
+kubectl get sts -n nginx
+kubectl get sts -A
+kubectl describe sts <statefulset-name> -n nginx
+kubectl scale sts <statefulset-name> --replicas=3 -n nginx
+kubectl rollout restart statefulset/<statefulset-name> -n nginx
+kubectl rollout status statefulset/<statefulset-name> -n nginx
+kubectl delete sts <statefulset-name> -n nginx
+kubectl get statefulset <statefulset-name> -n nginx -o yaml
+
+# ConfigMap
+kubectl get configmap -n nginx
+kubectl get cm -n nginx
+kubectl describe configmap <configmap-name> -n nginx
+kubectl describe cm <configmap-name> -n nginx
+kubectl create configmap app-config --from-literal=APP_ENV=production -n nginx
+kubectl create configmap app-config --from-file=config.env -n nginx
+kubectl delete configmap <configmap-name> -n nginx
+kubectl get configmap <configmap-name> -n nginx -o yaml
+
+# Secret
+kubectl get secret -n nginx
+kubectl describe secret <secret-name> -n nginx
+kubectl create secret generic app-secret --from-literal=DB_PASSWORD=password -n nginx
+kubectl create secret generic app-secret --from-file=secret.env -n nginx
+kubectl delete secret <secret-name> -n nginx
+kubectl get secret <secret-name> -n nginx -o yaml
+
+# Decode Secret
+kubectl get secret <secret-name> -n nginx -o yaml
+echo "cGFzc3dvcmQ=" | base64 -d
+
+# Apply YAML
+kubectl apply -f configmap.yml
+kubectl apply -f secret.yml
+kubectl delete -f configmap.yml
+kubectl delete -f secret.yml
