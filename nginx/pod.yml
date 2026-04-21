@@ -16,3 +16,8 @@ spec:
       limits:
         cpu: 200m
         memory: 256Mi
+    tolerations:
+    - key: "prod"
+      operator: "Equal"
+      value: "true"
+      effect: "NoSchedule"
