@@ -5,12 +5,6 @@
 # Now check lable node 
 # kubectl get nodes --show-labels
 
-
-
-
-
-
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -39,16 +33,16 @@ spec:
       - name: apache
         image: httpd:latest
 
-  #   affinity:
-  #       nodeAffinity:
-  #       preferredDuringSchedulingIgnoredDuringExecution:
-  #       - weight: 1
-  #         preference:
-  #         matchExpressions:
-  #         - key: disktype
-  #           operator: In 
-  #           values:
-  #           - ssd
+#   affinity:
+#       nodeAffinity:
+#       preferredDuringSchedulingIgnoredDuringExecution:
+#       - weight: 1
+#         preference:
+#         matchExpressions:
+#         - key: disktype
+#           operator: In 
+#           values:
+#           - ssd
 
 # In = label value must match given values
 # NotIn = label value must not match given values
