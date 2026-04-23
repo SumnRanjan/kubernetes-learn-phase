@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: apache-sa
+  namespace: apache
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: apache-cluster-manager
+
+rules:
+- apiGroups: [""]
+  resources: ["pods", "services"]
+  verbs: ["get", "list", "watch", "create", "delete", "patch", "update"]
+
+- apiGroups: ["apps"]
+  resources: ["deployments"]
+  verbs: ["get", "list", "watch", "create", "delete", "patch", "update"]
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: apache-cluster-binding
+
+subjects:
+- kind: ServiceAccount
+  name: apache-sa
+  namespace: apache
+
+roleRef:
+  kind: ClusterRole
+  name: apache-cluster-manager
+  apiGroup: rbac.authorization.k8s.io
