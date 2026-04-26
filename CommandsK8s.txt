@@ -265,3 +265,12 @@ helm package .
 
 13. Delete Helm release
 helm uninstall dev-node-js-app -n dev-node
+
+
+# Helm Repo 
+helm repo add bitnami https://charts.bitnami.com/bitnami
+helm repo update
+helm search repo nginx
+helm install my-nginx bitnami/nginx -n nginx --create-namespace
+helm repo list 
+helm repo remove
