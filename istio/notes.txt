@@ -1,0 +1,188 @@
+SERVICE MESH & ISTIO – SIMPLE NOTES (Q/A + COMMAND STYLE)
+
+---
+
+1. WHAT IS SERVICE MESH?
+
+---
+
+Q: What is Service Mesh?
+A: It is a layer that manages communication between microservices.
+
+Q: What is the main idea?
+A: Kubernetes allows communication, Service Mesh controls HOW it happens.
+
+Example:
+Pod A → Pod B
+Pod A → Proxy → Pod B Proxy → Pod B
+
+---
+
+2. WHY SERVICE MESH IS USED?
+
+---
+
+Q: Why do we use Service Mesh?
+A:
+
+* Security (mTLS)
+* Traffic management
+* Observability
+* Reliability
+
+---
+
+3. WHAT IS ISTIO?
+
+---
+
+Q: What is Istio?
+A: It is a Service Mesh used in Kubernetes.
+
+Q: How does it work?
+A: Uses sidecar proxy (Envoy)
+
+---
+
+4. ISTIO ARCHITECTURE
+
+---
+
+Q: What are Istio components?
+
+A:
+Data Plane → Envoy proxies (handle traffic)
+Control Plane → Istiod (manage config)
+
+---
+
+5. SIDECAR PROXY
+
+---
+
+Q: What is sidecar proxy?
+A: A container that runs with the app and intercepts traffic.
+
+Pod:
+
+* App container
+* istio-proxy
+
+---
+
+6. HOW ISTIO WORKS
+
+---
+
+Q: How Istio works?
+A:
+
+1. App sends request
+2. iptables redirects to Envoy
+3. Envoy applies rules
+4. Request goes to destination Envoy
+5. Then to service
+
+---
+
+7. ISTIO FEATURES
+
+---
+
+Q: What features Istio provides?
+
+A:
+Security → mTLS
+Traffic → Load balancing, Canary
+Reliability → Retry, Timeout
+Observability → Metrics, Logs, Tracing
+
+---
+
+8. ISTIO COMPONENTS
+
+---
+
+Q: Important components?
+
+A:
+Envoy → Proxy
+Istiod → Control plane
+Gateway → Entry point
+VirtualService → Routing
+DestinationRule → Policies
+
+---
+
+9. COMMANDS
+
+---
+
+Check version:
+istioctl version
+
+Install Istio:
+istioctl install --set profile=demo -y
+
+Check pods:
+kubectl get pods -n istio-system
+
+Enable injection:
+kubectl label namespace demo istio-injection=enabled
+
+---
+
+10. ISTIO VS KUBERNETES
+
+---
+
+Q: Difference?
+
+Kubernetes → Enables communication
+Istio → Controls communication
+
+---
+
+11. WHEN TO USE ISTIO
+
+---
+
+Q: When to use?
+A: Microservices, production systems
+
+Q: When not to use?
+A: Small projects
+
+---
+
+12. INTERVIEW QUESTIONS
+
+---
+
+Q: What is Service Mesh?
+A: Manages service communication
+
+Q: What is Istio?
+A: Service mesh using sidecar proxy
+
+Q: What is sidecar proxy?
+A: Helper container for traffic
+
+Q: Does Istio enable communication?
+A: No, Kubernetes does
+
+Q: What is Envoy?
+A: Proxy used in Istio
+
+---
+
+13. SUMMARY
+
+---
+
+Service Mesh → controls communication
+Istio → implements using Envoy proxies
+
+---
+
+## END
